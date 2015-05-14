@@ -1,0 +1,13 @@
+{
+    "name": "hienning/taxonomy",
+    "require": {
+        "php": ">=5.4.0",
+        "laravel/framework": ">=5.0"
+    },
+    "authors": [
+        {
+            "name": "Hienning Lueng",
+            "email": "hienjningz@gmail.com"
+        }
+    ]
+}
