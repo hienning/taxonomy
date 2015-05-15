@@ -1,5 +1,6 @@
 {
     "name": "hienning/taxonomy",
+    "license": "GPL-2.0",
     "require": {
         "php": ">=5.4.0",
         "laravel/framework": ">=5.0"
@@ -9,5 +10,15 @@
             "name": "Hienning Lueng",
             "email": "hienjningz@gmail.com"
         }
-    ]
+    ],
+    "autoload": {
+        "psr-4": {
+            "Hienning\\Taxonomy\\": "src/"
+        }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0-dev"
+        }
+    }
 }

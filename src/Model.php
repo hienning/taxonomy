@@ -1,7 +1,9 @@
 <?php namespace Hienning\Taxonomy;
 
 
-class TaxonomyTraits {
+
+class Model extends \Illuminate\Database\Eloquent\Model
+{
 
 
 	const ROOT_ID   = 1;
@@ -45,7 +47,7 @@ class TaxonomyTraits {
 			$root->depth   = 0;
 			$root->left    = 1;
 			$root->right   = 2;
-			$root->created = time();
+
 			$root->save();
 		}
 
@@ -103,7 +105,7 @@ class TaxonomyTraits {
 
 
 	/**
-	 * Add a new child term for current term.
+	 * Add a new child item for current term.
 	 *
 	 * @param $name
 	 * @param $code
@@ -130,7 +132,7 @@ class TaxonomyTraits {
 			$term->code    = trim($code);
 			$term->left    = $rightVal + 1;
 			$term->right   = $rightVal + 2;
-			$term->created = time();
+
 			$term->save();
 
 			DB::commit();
@@ -176,7 +178,7 @@ class TaxonomyTraits {
 
 	/**
 	 * Remove but don't delete specified sub-taxonomy from the taxonomy, and
-	 * insert that sub-taxonomy after target taxonomy, as it's sub-taxonomy.
+	 * then insert that sub-taxonomy after target taxonomy, as it's sub-item.
 	 *
 	 * @param mixed	parent
 	 * @param mixed	after
@@ -252,13 +254,13 @@ class TaxonomyTraits {
 			// need to subtract all taxonomies that between $target and $this by $gap
 
 			$this->where('left', '>', $this->right)
-				->where('right', '<=', $rightVal)
-				->whereNotIn('id', [$targetParent])
-				->decrement('right', $gap);
+				 ->where('right', '<=', $rightVal)
+				 ->whereNotIn('id', [$targetParent])
+				 ->decrement('right', $gap);
 
 			$this->where('left', '>', $this->right)
-				->where('left', '<=', $target->left)
-				->decrement('left', $gap);
+				 ->where('left', '<=', $target->left)
+				 ->decrement('left', $gap);
 
 			$distance = $this->right - $rightVal;
 
@@ -268,13 +270,13 @@ class TaxonomyTraits {
 			// need to add all taxonomies that between $target and $this by $gap
 
 			$this->where('right', '>', $rightVal)
-				->where('right', '<', $this->left)
-				->increment('right', $gap);
+				 ->where('right', '<', $this->left)
+				 ->increment('right', $gap);
 
 			$this->where('left', '>', $rightVal)
-				->where('left', '<', $this->left)
-				//->whereNotIn('id', [$targetParent])
-				->increment('left', $gap);
+				 ->where('left', '<', $this->left)
+				 //->whereNotIn('id', [$targetParent])
+				 ->increment('left', $gap);
 
 			$distance = $this->left - $rightVal - 1;
 
@@ -287,6 +289,4 @@ class TaxonomyTraits {
 			'depth' => DB::raw('`depth` - ' . $this->depth . ' + ' . $extraDepth . ' + ' . $target->depth),
 		]);
 	}
-
-
 }
