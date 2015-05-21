@@ -1,6 +1,8 @@
 <?php namespace Hienning\Taxonomy\Console;
 
 
+use Hienning\Taxonomy\Model;
+
 use Illuminate\Console\Command;
 use Illuminate\Database\Schema\Blueprint;
 use Symfony\Component\Console\Input\InputOption;
@@ -99,6 +101,6 @@ class CreateTableCommand extends Command
         });
 
 
-        \Hienning\Taxonomy\TaxonomyTraits::root();
+        Model::root();
 	}
 }

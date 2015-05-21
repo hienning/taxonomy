@@ -1,8 +1,7 @@
 <?php namespace Hienning\Taxonomy;
 
 
-
-class ServiceProvider extends Illuminate\Support\ServiceProvider
+class ServiceProvider extends \Illuminate\Support\ServiceProvider
 {
 
     /**
@@ -33,7 +32,7 @@ class ServiceProvider extends Illuminate\Support\ServiceProvider
 
         $this->app['command.taxonomy.createtable'] = $this->app->share(
             function ($app) {
-                return new CreateTableCommand($app['config'], $app['files'], $app['view']);
+                return new Console\CreateTableCommand($app['config'], $app['files'], $app['view']);
             }
         );
 
