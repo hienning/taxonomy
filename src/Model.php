@@ -101,7 +101,7 @@ class Model extends \Illuminate\Database\Eloquent\Model
 
 
     /**
-     * Fetch the all the direct decendant.
+     * Fetch the all the direct decendants.
      *
      * @return \Illuminate\Support\Collection
      */
@@ -109,6 +109,7 @@ class Model extends \Illuminate\Database\Eloquent\Model
     {
         return self::where('left', '>', $this->left)
                    ->where('right', '<', $this->right)
+                   ->where('depth', '=', $this->depth+1)
                    ->orderBy('left')
                    ->get();
     }
