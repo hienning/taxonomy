@@ -11,7 +11,7 @@
  * 1) The top-most node is the "root" node. By preserve this stub, we can
  *    count the sub-nodes conveniently.
  * 2) The direct decendant of the root is the "vocabulary" node;
- * 3) All child nodes of vocabulary, are the terms;
+ * 3) All the child nodes of vocabulary, and its decendants, are terms;
  *
  * See the following for intuitive explanations.
  *
@@ -50,7 +50,7 @@ class Model extends \Illuminate\Database\Eloquent\Model
 
 
     /**
-     * Return root node.
+     * Return the root node.
      *
      * @return Model|\Illuminate\Support\Collection|null|static
      */
