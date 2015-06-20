@@ -318,4 +318,26 @@ class Model extends \Illuminate\Database\Eloquent\Model
             'depth' => DB::raw('`depth` - ' . $this->depth . ' + ' . $extraDepth . ' + ' . $target->depth),
         ]);
     }
+
+
+
+    /**
+     * Retrieve a gingle path to the current taxonomy/term.
+     *
+     * @param $callback
+     * @return mixed
+     */
+    public function path($callback = null)
+    {
+        $query = self::from(\DB::raw('`' . $this->table . '` as `node`, `' . $this->table . '` as `parent`'))
+                ->whereRaw('`node`.`id` = ' . $this->id)
+                ->whereRaw('`node`.`left` between `parent`.`left` and `parent`.`right`')
+                ->orderByRaw('`parent`.`left`');
+
+        if (!empty($callback) && is_callable($callback)) {
+            $callback($query);
+        }
+
+        return $query->get();
+    }
 }
