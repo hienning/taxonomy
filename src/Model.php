@@ -127,8 +127,7 @@ class Model extends \Illuminate\Database\Eloquent\Model
     {
         $query = self::where('left', '>', $this->left)
                      ->where('right', '<', $this->right)
-                     ->orderBy('left')
-                     ->get();
+                     ->orderBy('left');
 
         if (!empty($callback) && is_callable($callback)) {
             $callback($query);
