@@ -1,8 +1,8 @@
 {
     "name": "hienning/taxonomy",
     "license": "GPL-2.0",
+	"homepage": "http://blog.tayrau.info/portfolio/",
     "require": {
-        "laravel/framework": ">=5.0"
     },
     "authors": [
         {
