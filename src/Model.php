@@ -117,6 +117,29 @@ class Model extends \Illuminate\Database\Eloquent\Model
 
 
     /**
+     * Retrieve all the decendants.
+	 *
+     * @param $callback
+     * @return mixed    The record is sort in the natural manner, i.e., the parent term
+	 * 					is always precede their children.
+     */
+    public function decendants($callback = null)
+    {
+        $query = self::where('left', '>', $regions->left)
+                     ->where('right', '<', $regions->right)
+                     ->orderBy('left')
+                     ->get();
+
+        if (!empty($callback) && is_callable($callback)) {
+            $callback($query);
+        }
+
+        return $query->get();
+    }
+
+
+
+    /**
      * Fetch the last (i.e. the right most) child term.
      *
      * @return mixed
@@ -330,9 +353,9 @@ class Model extends \Illuminate\Database\Eloquent\Model
     public function path($callback = null)
     {
         $query = self::from(\DB::raw('`' . $this->table . '` as `node`, `' . $this->table . '` as `parent`'))
-                ->whereRaw('`node`.`id` = ' . $this->id)
-                ->whereRaw('`node`.`left` between `parent`.`left` and `parent`.`right`')
-                ->orderByRaw('`parent`.`left`');
+                     ->whereRaw('`node`.`id` = ' . $this->id)
+                     ->whereRaw('`node`.`left` between `parent`.`left` and `parent`.`right`')
+                     ->orderByRaw('`parent`.`left`');
 
         if (!empty($callback) && is_callable($callback)) {
             $callback($query);
