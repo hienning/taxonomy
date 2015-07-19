@@ -1,10 +1,7 @@
 <?php namespace Hienning\Taxonomy;
 
 
-use Illuminate\Support\ServiceProvider;
-
-
-class TaxonomyServiceProvider extends ServiceProvider
+class ServiceProvider extends \Illuminate\Support\ServiceProvider
 {
 
     /**
@@ -33,13 +30,13 @@ class TaxonomyServiceProvider extends ServiceProvider
         $configPath = __DIR__ . '/../config/taxonomy.php';
         $this->mergeConfigFrom($configPath, 'taxonomy');
 
-        $this->app['command.taxonomy.make'] = $this->app->share(
+        $this->app['command.taxonomy.createtable'] = $this->app->share(
             function ($app) {
-                return new CreateTableCommand($app['config'], $app['files'], $app['view']);
+                return new Console\CreateTableCommand($app['config'], $app['files'], $app['view']);
             }
         );
 
-        $this->commands('command.taxonomy.create-table');
+        $this->commands('command.taxonomy.createtable');
     }
 
     /**
@@ -49,7 +46,7 @@ class TaxonomyServiceProvider extends ServiceProvider
      */
     public function provides()
     {
-        return ['command.ide-helper.generate'];
+        return ['command.taxonomy.createtable'];
     }
 
 }

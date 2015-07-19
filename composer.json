@@ -1,13 +1,24 @@
 {
     "name": "hienning/taxonomy",
+    "license": "GPL-2.0",
+	"homepage": "http://blog.tayrau.info/portfolio/",
     "require": {
-        "php": ">=5.4.0",
-        "laravel/framework": ">=5.0"
     },
     "authors": [
         {
             "name": "Hienning Lueng",
             "email": "hienjningz@gmail.com"
         }
-    ]
+    ],
+    "autoload": {
+        "psr-4": {
+            "Hienning\\Taxonomy\\": "src/"
+        }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0-dev"
+        }
+    },
+    "minimum-stability": "dev"
 }
