@@ -125,8 +125,8 @@ class Model extends \Illuminate\Database\Eloquent\Model
      */
     public function decendants($callback = null)
     {
-        $query = self::where('left', '>', $regions->left)
-                     ->where('right', '<', $regions->right)
+        $query = self::where('left', '>', $this->left)
+                     ->where('right', '<', $this->right)
                      ->orderBy('left')
                      ->get();
 
