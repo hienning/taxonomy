@@ -1,15 +1,15 @@
 # Taxonomy
 
-A taxonomy inspired by Drupal for Laravel 5.
+A taxonomy inspired by Drupal for Laravel 5. Lots of sql queries in this codebase were copied from Mike Hillyer's [post](http://mikehillyer.com/articles/managing-hierarchical-data-in-mysql/).
 
 
-## Install
+## Installation
 
 ```
 composer require hienning/taxonomy
 ```
 
-load the service in config/app.php:
+load the service in your config/app.php:
 
 ```php
 /*
@@ -25,18 +25,20 @@ load the service in config/app.php:
 ...
 ```
 
-## Usage
+## How to use it
 
-### 1. Create the data table
+### Preparation
+
+#### 1. Create the data table
 
 ```
 artisan taxonomy:create-table [name]
 ```
 
-where the 'name' is the table name which being create; or use 'taxonomy'
-by leave this argument empty.
+where the 'name' is the table name which being created; or use 'taxonomy'
+by leaving this argument blank.
 
-### 2. Inherit your model from Hienning\Taxonomy\Model
+#### 2. Inherit your model from Hienning\Taxonomy\Model
 
 ```php
 class Taxonomy extends \Hienning\Taxonomy\Model
@@ -46,3 +48,5 @@ class Taxonomy extends \Hienning\Taxonomy\Model
 
 ```
 
+
+To be continue ... ;-)
